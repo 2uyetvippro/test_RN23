@@ -4,16 +4,21 @@ import Search from '../components/Search'
 import Note from '../components/Note'
 import { useNavigation } from '@react-navigation/native'
 import { data } from '../data/data';
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Danhsach = () => {
 
   const { navigate } = useNavigation();
+  const [listNote, setListNote] = useState(data);
+
   const goToTaomoi = () => {
     navigate('Taomoi', { useName: 'Taomoi' });
   };
   const [textSearch, settextSearch] = useState("");
-  const [listNote, setListNote] = useState(data);
+
+  const handleDelete = () => {
+    console.log(`1111`)
+  };
 
   const renderResult = () => {
     const dataa = data.filter((value) =>
@@ -22,12 +27,13 @@ const Danhsach = () => {
 
     const renderItem = ({ item }) => {
       return (
-        <Note data={item} />
+        <Note data={item} handleDelete={handleDelete} />
       )
     }
     // data.map(element => {
     //   return <Note data={element} />
     // })
+
 
     return (
       <View style={{ flex: 1, flexDirection: "column" }}>
@@ -66,7 +72,7 @@ const Danhsach = () => {
             <View>
               <View style={styles.list}>
                 {
-                  data.map(element => {
+                  listNote.map(element => {
                     return <Note data={element} />
                   })
                 }

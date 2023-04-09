@@ -8,6 +8,8 @@ const Chitiet = ({ route }) => {
     goBack();
   }
   const { title, description } = route.params
+
+
   return (
     <View style={styles.container}>
       <View>
