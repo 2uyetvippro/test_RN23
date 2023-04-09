@@ -6,23 +6,29 @@ import { useNavigation } from '@react-navigation/native'
 import { data } from '../data/data';
 
 
-const Danhsach = ({ route }) => {
+const Danhsach = () => {
 
   const { navigate } = useNavigation();
   const goToTaomoi = () => {
     navigate('Taomoi', { useName: 'Taomoi' });
   };
   const [textSearch, settextSearch] = useState("");
+  const [listNote, setListNote] = useState(data);
+
   const renderResult = () => {
     const dataa = data.filter((value) =>
       value.title.toLocaleLowerCase().includes(textSearch.toLocaleLowerCase())
     );
-    const renderItem = () => (
-      // data.map(element => {
-      //   return <Note data={element} />
-      // })
-      < Note item={item} navigation={navigation} />
-    );
+
+    const renderItem = ({ item }) => {
+      return (
+        <Note data={item} />
+      )
+    }
+    // data.map(element => {
+    //   return <Note data={element} />
+    // })
+
     return (
       <View style={{ flex: 1, flexDirection: "column" }}>
         <Text style={{ fontSize: 12, fontWeight: "bold", marginTop: 15, paddingLeft: 20 }}>
